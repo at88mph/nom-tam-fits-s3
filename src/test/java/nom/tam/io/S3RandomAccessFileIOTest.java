@@ -117,7 +117,7 @@ public class S3RandomAccessFileIOTest {
                 return new ByteArrayInputStream(input);
             }
         }) {
-            final byte[] buffer = new byte[8192];
+            final byte[] buffer = new byte[4];
             testSubject.read(buffer, 2, 4);
 
             final byte[] expected = new byte[] {

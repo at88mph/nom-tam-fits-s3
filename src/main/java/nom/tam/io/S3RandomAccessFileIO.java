@@ -68,7 +68,9 @@ public class S3RandomAccessFileIO implements RandomAccessFileIO {
 
     @Override
     public void close() throws IOException {
-        client.close();
+        if (client != null) {
+            client.close();
+        }
     }
 
     @Override
@@ -95,7 +97,7 @@ public class S3RandomAccessFileIO implements RandomAccessFileIO {
 
         try (InputStream inputStream = openStream()) {
             final byte[] result = inputStream.readAllBytes();
-            System.arraycopy(result, 0, b, from, (int) available);
+            System.arraycopy(result, from, b, 0, (int) available);
 
             this.position += available;
             return (int) available;
